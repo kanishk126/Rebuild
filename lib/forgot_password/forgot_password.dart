@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../otp_screen/otp_screen.dart';
+
 
 class ForgotPassword extends StatefulWidget {
   const ForgotPassword({Key? key}) : super(key: key);
@@ -61,8 +63,6 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   ),
                   child: TextFormField(
                       controller: textcontroller,
-                      obscureText: true,
-                      obscuringCharacter: "*",
                       keyboardType: TextInputType.emailAddress,
                       cursorColor: Colors.black,
                       decoration: const InputDecoration(
@@ -96,7 +96,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     ),
 
                     onPressed: (){
-
+                      Navigator.push(context, MaterialPageRoute(builder: (c)=> OtpScreen(email:textcontroller.text)));
                     },
                   ),
                 )
