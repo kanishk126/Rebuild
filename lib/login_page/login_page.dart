@@ -167,42 +167,33 @@ class _LogInScreenState extends State<LogInScreen> {
 
               ////////// Login Button//////
 
-              Container(
-                width: 314,
-                height: 50,
-                margin: const EdgeInsets.only(top: 34,left: 29,right: 29),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    elevation: 5,
-                    shadowColor: Colors.grey.shade500,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(6),
-                    )
+              GestureDetector(
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  margin: const EdgeInsets.only(top: 34,left: 29,right: 29),
+                  padding: const EdgeInsets.only(top: 15,bottom: 15),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(6),
+                    color: Theme.of(context).primaryColor,),
+                  child: const Center(
+                    child: Text("LOGIN",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w700,
+                        fontFamily: "lib/font/DMSans-Medium.ttf",
+                        fontSize: 15,
+                      ),
+                    ),
                   ),
-                    child: const Text("LOGIN",
-                    style: TextStyle(
-                      fontWeight: FontWeight.w700,
-                      fontFamily: "lib/font/DMSans-Medium.ttf",
-                      fontSize: 15,
-                    ),
-                    ),
-                  onPressed: (){
-                    if(textcontroller.text.isNotEmpty){
-                      if(pswrdcontroller.text.isNotEmpty){
-                        if(pswrdcontroller.text.length.isLowerThan(13) && pswrdcontroller.text.length.isGreaterThan(4)){
-                          Navigator.push(context, MaterialPageRoute(builder: (c) => const HomeScreen()));
+                ),
+                onTap: (){
+                  if(textcontroller.text.isNotEmpty){
+                    if(pswrdcontroller.text.isNotEmpty){
+                      if(pswrdcontroller.text.length.isLowerThan(13) && pswrdcontroller.text.length.isGreaterThan(4)){
+                        Navigator.pushAndRemoveUntil<dynamic>(context, MaterialPageRoute<dynamic>(builder: (BuildContext context) => const HomeScreen(),), (route) => false,);
                       }else{
                         Fluttertoast.showToast(
-                        msg: "Please Enter Valid Password",
-                            toastLength: Toast.LENGTH_SHORT,
-                            gravity: ToastGravity.BOTTOM,
-                            timeInSecForIosWeb: 1,
-                            backgroundColor: Colors.red,
-                            textColor: Colors.white,
-                            fontSize: 14.0);}
-                      }else{
-                        Fluttertoast.showToast(
-                        msg: "Please Enter Password",
+                            msg: "Please Enter Valid Password",
                             toastLength: Toast.LENGTH_SHORT,
                             gravity: ToastGravity.BOTTOM,
                             timeInSecForIosWeb: 1,
@@ -211,51 +202,58 @@ class _LogInScreenState extends State<LogInScreen> {
                             fontSize: 14.0);}
                     }else{
                       Fluttertoast.showToast(
-                          msg: "Please Enter Your register Email Id",
+                          msg: "Please Enter Password",
                           toastLength: Toast.LENGTH_SHORT,
                           gravity: ToastGravity.BOTTOM,
                           timeInSecForIosWeb: 1,
                           backgroundColor: Colors.red,
                           textColor: Colors.white,
                           fontSize: 14.0);}
+                  }else{
+                    Fluttertoast.showToast(
+                        msg: "Please Enter Your register Email Id",
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.BOTTOM,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: Colors.red,
+                        textColor: Colors.white,
+                        fontSize: 14.0);}
                   },
-                ),
               ),
-
 
               //////////Login With Google Button///////
 
               Container(
-                width: 314,
-                height: 50,
-                color: const Color(0xFFE6E6E6),
-                margin: const EdgeInsets.only(top: 23, left: 29, right: 29),
-                child: ElevatedButton.icon(
-                  label: const Center(
-                    child: Text('LOGIN WITH GOOGLE',
-                      style: TextStyle(
-                      color: Colors.black,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w700,
-                    ),
-                    ),
+                width: MediaQuery.of(context).size.width,
+                margin: const EdgeInsets.only(top: 23,left: 29,right: 29),
+                padding: const EdgeInsets.only(top: 15, bottom: 15),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(6),
+                  color: Colors.white,
                   ),
-                  icon: Container(
-                    margin: const EdgeInsets.only(left: 12),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Image.asset("lib/icon/google.png"),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 59,right: 14),
+                      child: Image.asset("lib/icon/google.png",
+                      height: 20,
+                          width: 19,
+                      fit: BoxFit.cover),
                     ),
-                  ),
-                  style: ButtonStyle(
-                    padding: MaterialStateProperty.all(const EdgeInsets.only(right: 70)),
-                    backgroundColor: MaterialStateProperty.all(const Color(0xFFE6E6E6)),
-                    shadowColor: MaterialStateProperty.all(Colors.grey),
-                    elevation: MaterialStateProperty.all(6.0)
-                  ),
-                  onPressed: () {
-
-                  },
+                    const Padding(
+                      padding: EdgeInsets.only(right: 59),
+                      child: Text("LOGIN WITH GOOGLE",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w700,
+                          fontFamily: "lib/font/DMSans-Medium.ttf",
+                          fontSize: 15,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
 
@@ -272,6 +270,7 @@ class _LogInScreenState extends State<LogInScreen> {
                       children: [
                         WidgetSpan(
                             child: GestureDetector(
+                              behavior: HitTestBehavior.translucent,
                               child: Text(" SignUp",
                                 style: TextStyle(
                                   color: Theme.of(context).primaryColor,

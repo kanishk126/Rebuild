@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
+import 'package:hoof_boot_rebuild/enter_new_password/new_password.dart';
 import 'package:hoof_boot_rebuild/forgot_password/forgot_password.dart';
 
 
 
 class OtpScreen extends StatefulWidget {
   OtpScreen({Key? key,required this.email}) : super(key: key);
+
 
   String email='';
 
@@ -13,6 +18,16 @@ class OtpScreen extends StatefulWidget {
 }
 
 class _OtpScreenState extends State<OtpScreen> {
+  TextEditingController otpcontroller1 = TextEditingController();
+  TextEditingController otpcontroller2 = TextEditingController();
+  TextEditingController otpcontroller3 = TextEditingController();
+  TextEditingController otpcontroller4 = TextEditingController();
+
+  final focuse1 = FocusNode();
+  final focuse2 = FocusNode();
+  final focuse3 = FocusNode();
+  final focuse4 = FocusNode();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,13 +63,12 @@ class _OtpScreenState extends State<OtpScreen> {
               )
           ),
           Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                margin: const EdgeInsets.only(left: 45),
-                alignment: Alignment.topCenter,
-                child: Text("${widget.email}",
+                margin: EdgeInsets.only(left: 15),
+                child: Text(widget.email,
                   textAlign: TextAlign.left,
                   style: const TextStyle(
                     fontFamily:"lib/font/DMSans-Bold.ttf",
@@ -64,23 +78,226 @@ class _OtpScreenState extends State<OtpScreen> {
                 ),
               ),
               Container(
+                width: 30,
+                height: 30,
+                margin: const EdgeInsets.only(left: 20,top: 10),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   color: Colors.black,
                 ),
-                // margin: EdgeInsets.only(right: 6),
-                // padding: EdgeInsets.all(10),
                 child: IconButton(
                     icon: const Icon(Icons.mode_edit_outline,
-                    size: 12,
+                    size: 15,
                     color: Colors.white,),
                 onPressed: (){
                       Navigator.push(context, MaterialPageRoute(builder: (c) => const ForgotPassword()));
                 },
                 ),
+              ),
+
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                margin: EdgeInsets.only(top: 55),
+                width: 50,
+                height: 60,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                  color: Colors.white,
+                ),
+                child: Center(
+                  child: TextFormField(
+                    textAlign: TextAlign.center,
+                    inputFormatters: [
+                      LengthLimitingTextInputFormatter(1)
+                    ],
+                    onChanged: (value){
+                      if(value.length.isEqual(1)){
+                        setState(() {
+                          FocusScope.of(context).requestFocus(focuse1);
+                        });
+                      }
+                    },
+                    controller: otpcontroller1,
+                    keyboardType: TextInputType.number,
+                    cursorColor: Theme.of(context).primaryColor,
+                    decoration: const InputDecoration(
+                        // contentPadding: EdgeInsets.all(14),
+                        border: InputBorder.none,
+                    ),
+                  ),
+                ),
+              ),
+              Container(
+                width: 50,
+                height: 60,
+                margin: EdgeInsets.only(top: 55,left: 16),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                  color: Colors.white,
+                ),
+
+                child: Center(
+                  child: TextFormField(
+                    textAlign: TextAlign.center,
+                    inputFormatters: [
+                      LengthLimitingTextInputFormatter(1)
+                    ],
+                    onChanged: (value){
+                      if(value.length.isEqual(1)){
+                        setState(() {
+                          FocusScope.of(context).requestFocus(focuse2);
+                        });
+                      }
+                    },
+                    controller: otpcontroller2,
+                    focusNode: focuse1,
+                    keyboardType: TextInputType.number,
+                    cursorColor: Theme.of(context).primaryColor,
+                    decoration: const InputDecoration(
+                      // contentPadding: EdgeInsets.all(14),
+                      border: InputBorder.none,
+                    ),
+                  ),
+                ),
+              ),
+              Container(
+                width: 50,
+                height: 60,
+                margin: EdgeInsets.only(top: 55,left: 16),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                  color: Colors.white,
+                ),
+                child: Center(
+                  child: TextFormField(
+                    textAlign: TextAlign.center,
+                    inputFormatters: [
+                      LengthLimitingTextInputFormatter(1)
+                    ],
+                    onChanged: (value){
+                      if(value.length.isEqual(1)){
+                        setState(() {
+                          FocusScope.of(context).requestFocus(focuse3);
+                        });
+                      }
+                    },
+                    controller: otpcontroller3,
+                    focusNode: focuse2,
+                    keyboardType: TextInputType.number,
+                    cursorColor: Theme.of(context).primaryColor,
+                    decoration: const InputDecoration(
+                      // contentPadding: EdgeInsets.all(14),
+                      border: InputBorder.none,
+                    ),
+                  ),
+                ),
+              ),
+              Container(
+                width: 50,
+                height: 60,
+                margin: EdgeInsets.only(top: 55,left: 16),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                  color: Colors.white,
+                ),
+                child: Center(
+                  child: TextFormField(
+                    textAlign: TextAlign.center,
+                    inputFormatters: [
+                      LengthLimitingTextInputFormatter(1)
+                    ],
+                    onChanged: (value){
+                      if(value.length.isEqual(1)){
+                        setState(() {
+                          FocusScope.of(context).requestFocus(focuse4);
+                        });
+                      }
+                    },
+                    controller: otpcontroller4,
+                    focusNode: focuse3,
+                    keyboardType: TextInputType.number,
+                    cursorColor: Theme.of(context).primaryColor,
+                    decoration: const InputDecoration(
+                      // contentPadding: EdgeInsets.all(14),
+                      border: InputBorder.none,
+                    ),
+                  ),
+                ),
               )
             ],
           ),
+
+          Expanded(child: Container()),
+
+          GestureDetector(
+            child: Container(
+              width:MediaQuery.of(context).size.width,
+              margin: const EdgeInsets.only(left: 30,right: 30, bottom: 53),
+              padding: EdgeInsets.only(top: 16,bottom:16),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(6),
+                color:Theme.of(context).primaryColor
+              ),
+                child: const Center(
+                  child: Text("VERIFY",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w700,
+                      fontFamily: "lib/font/DMSans-Medium.ttf",
+                      fontSize: 15,
+                    ),
+                  ),
+                ),
+              ),
+            onTap: (){
+              if(otpcontroller1.text.isNotEmpty){
+                if(otpcontroller2.text.isNotEmpty){
+                  if(otpcontroller3.text.isNotEmpty){
+                    if(otpcontroller4.text.isNotEmpty){
+                      Navigator.push(context, MaterialPageRoute(builder: (c)=> const NewPassword()));
+                    }else{
+                      Fluttertoast.showToast(
+                      msg: "Please Enter 4th digit of OTP",
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.BOTTOM,
+                          timeInSecForIosWeb: 1,
+                          backgroundColor: Colors.red,
+                          textColor: Colors.white,
+                          fontSize: 14.0);}
+                  }else{
+                    Fluttertoast.showToast(
+                        msg: "Please Enter 3rd and 4th digit of OTP",
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.BOTTOM,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: Colors.red,
+                        textColor: Colors.white,
+                        fontSize: 14.0);}
+                }else {
+                  Fluttertoast.showToast(
+                      msg: "Please Enter 2nd 3rd and 4th digit of OTP",
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.BOTTOM,
+                      timeInSecForIosWeb: 1,
+                      backgroundColor: Colors.red,
+                      textColor: Colors.white,
+                      fontSize: 14.0);}
+                  }else{
+                Fluttertoast.showToast(
+                    msg: "Please Enter 1st digit of OTP",
+                    toastLength: Toast.LENGTH_SHORT,
+                    gravity: ToastGravity.BOTTOM,
+                    timeInSecForIosWeb: 1,
+                    backgroundColor: Colors.red,
+                    textColor: Colors.white,
+                    fontSize: 14.0);}
+            }
+            ),
         ],
       )
     );

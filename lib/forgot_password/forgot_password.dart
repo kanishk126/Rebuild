@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import '../otp_screen/otp_screen.dart';
 
@@ -76,32 +77,44 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       ),
                     ),
                   ),
-                Container(
-                  width: 314,
-                  height: 50,
-                  margin: const EdgeInsets.only(top: 24),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Theme.of(context).primaryColor,
-                      elevation: 5,
-                      shadowColor: Colors.grey,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(6)
-                      )
-                    ),
-                    child: const Text("Get OTP",
-                      style: TextStyle(
 
+                GestureDetector(
+                  child: Container(
+                    width: 314,
+                    height: 50,
+                    margin: const EdgeInsets.only(top: 24),
+                    padding: const EdgeInsets.only(top: 15, bottom: 15),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(6),
+                      color: Theme.of(context).primaryColor,
+                    ),
+                    child: const Center(
+                      child: Text("GET OTP",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w700,
+                          fontFamily: "lib/font/DMSans-Medium.ttf",
+                          fontSize: 15,
+                        ),
                       ),
                     ),
-
-                    onPressed: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (c)=> OtpScreen(email:textcontroller.text)));
-                    },
                   ),
-                )
+                  onTap: (){
+                    if(textcontroller.text.isNotEmpty){
+                      Navigator.push(context, MaterialPageRoute(builder: (c)=> OtpScreen(email:textcontroller.text)));
+                    }else{
+                      Fluttertoast.showToast(
+                          msg: "Please Enter Your Email Id",
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.BOTTOM,
+                          timeInSecForIosWeb: 1,
+                          backgroundColor: Colors.red,
+                          textColor: Colors.white,
+                          fontSize: 14.0);}
+                    },
+                ),
               ]
-            ),
+          ),
     );
   }
 }
